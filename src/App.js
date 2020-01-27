@@ -83,6 +83,7 @@ class App extends Component {
           <td>{d.rating}</td>
           <td>{d.city}</td>
           <td>{d.skills && d.skills.join(",")}</td>
+          <td>{d.language}</td>
           <td>
             <button
               onClick={() => {
@@ -141,6 +142,18 @@ class App extends Component {
                 { key: "mumbai", label: "Mumbai", value: "Mumbai" },
                 { key: "bangalore", label: "Bangalore", value: "Bangalore" },
                 { key: "kerala", label: "Kerala", value: "Kerala" }
+              ]
+            },
+            {
+              key: "language",
+              label: "language",
+              type: "select",
+              props: { required: true },
+              options: [
+                { key: "english", label: "English", value: "English" },
+                { key: "french", label: "French", value: "French" },
+                { key: "spanish", label: "Spanish", value: "Spanish" },
+                { key: "thai", label: "Thai", value: "Thai" }
               ]
             },
             {

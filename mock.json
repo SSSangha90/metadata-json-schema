@@ -1,0 +1,30 @@
+{
+    "lang": 
+    {     
+        "options": 
+        {         
+            "label": "language",
+            "uiType": "select",         
+            "order": 1,         
+            "isRequired": true,         
+            "isIndexed": true     
+        },             
+            "values": 
+            [{           
+                "key": "FR",           
+                "value": "French"         
+            },         
+            {           
+                "key": "EN",           
+                "value": "English"         
+            },         
+            {           
+                "key": "SP",           
+                "value": "Spanish"         
+            },         
+            {           
+                "key": "TH",           
+                "value": "Thai"         
+            }]   
+    } 
+} 
