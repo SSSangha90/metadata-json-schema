@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import DynamicForm from "./components/DynamicForm";
 import "./App.css";
 
+const randomID = 'VX-' + Math.floor(100000 + Math.random() * 900000)
 class App extends Component {
   state = {
     data: [
       {
-        id: 1,
         name: "a",
         age: 29,
         qualification: "B.Com",
@@ -16,7 +16,6 @@ class App extends Component {
         skills: ["reactjs", "angular", "vuejs"]
       },
       {
-        id: 2,
         name: "b",
         age: 35,
         qualification: "B.Sc",
@@ -26,7 +25,6 @@ class App extends Component {
         skills: ["reactjs", "angular"]
       },
       {
-        id: 3,
         name: "c",
         age: 42,
         qualification: "B.E",
@@ -76,6 +74,7 @@ class App extends Component {
     let data = this.state.data.map(d => {
       return (
         <tr key={d.id}>
+          <td>{randomID}</td>
           <td>{d.name}</td>
           <td>{d.age}</td>
           <td>{d.qualification}</td>
@@ -110,6 +109,7 @@ class App extends Component {
           title="Registration"
           defaultValues={this.state.current}
           model={[
+            { key: "mediaAssetID", label: "mediaAssetID", placeholder: randomID},
             { key: "name", label: "Name", props: { required: true } },
             { key: "age", label: "Age", type: "number" },
             {
@@ -124,12 +124,7 @@ class App extends Component {
               type: "radio",
               options: [
                 { key: "male", label: "Male", name: "gender", value: "male" },
-                {
-                  key: "female",
-                  label: "Female",
-                  name: "gender",
-                  value: "female"
-                }
+                { key: "female", label: "Female", name: "gender", value: "female" }
               ]
             },
             { key: "qualification", label: "Qualification" },
