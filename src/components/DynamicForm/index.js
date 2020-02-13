@@ -9,7 +9,7 @@ export default class DynamicForm extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log("gds:p:s", nextProps.defaultValues, prevState);
+    console.log("state change", nextProps.defaultValues, prevState);
 
     let derivedState = {};
 
@@ -17,9 +17,6 @@ export default class DynamicForm extends React.Component {
       nextProps.defaultValues &&
       nextProps.defaultValues.id !== prevState.id
     ) {
-      //   Object.keys(prevState).forEach(k => {
-      //     derivedState[k] = "";
-      //   });
       return {
         ...nextProps.defaultValues
       };
@@ -35,7 +32,6 @@ export default class DynamicForm extends React.Component {
   };
 
   onChange = (e, key, type = "single") => {
-    //console.log(`${key} changed ${e.target.value} type ${type}`);
     if (type === "single") {
       this.setState(
         {
@@ -43,30 +39,7 @@ export default class DynamicForm extends React.Component {
         },
         () => {}
       );
-    } else {
-      // Array of values (e.g. checkbox): TODO: Optimization needed.
-      let found = this.state[key]
-        ? this.state[key].find(d => d === e.target.value)
-        : false;
-
-      if (found) {
-        let data = this.state[key].filter(d => {
-          return d !== found;
-        });
-        this.setState({
-          [key]: data
-        });
-      } else {
-        console.log("found", key, this.state[key]);
-        // this.setState({
-        //   [key]: [e.target.value, ...this.state[key]]
-        // });
-        let others = this.state[key] ? [...this.state[key]] : [];
-        this.setState({
-          [key]: [e.target.value, ...others]
-        });
-      }
-    }
+    } 
   };
 
   renderForm = () => {
@@ -97,30 +70,6 @@ export default class DynamicForm extends React.Component {
         />
       );
 
-      if (type == "radio") {
-        input = m.options.map(o => {
-          let checked = o.value == value;
-          return (
-            <React.Fragment key={"fr" + o.key}>
-              <input
-                {...props}
-                className="form-input"
-                type={type}
-                key={o.key}
-                name={o.name}
-                checked={checked}
-                value={o.value}
-                onChange={e => {
-                  this.onChange(e, o.name);
-                }}
-              />
-              <label key={"ll" + o.key}>{o.label}</label>
-            </React.Fragment>
-          );
-        });
-        input = <div className="form-group-radio">{input}</div>;
-      }
-
       if (type == "select") {
         input = m.options.map(o => {
           let checked = o.value == value;
@@ -150,39 +99,9 @@ export default class DynamicForm extends React.Component {
         );
       }
 
-      if (type == "checkbox") {
-        input = m.options.map(o => {
-          //let checked = o.value == value;
-          let checked = false;
-          if (value && value.length > 0) {
-            checked = value.indexOf(o.value) > -1 ? true : false;
-          }
-          //console.log("Checkbox: ", checked);
-          return (
-            <React.Fragment key={"cfr" + o.key}>
-              <input
-                {...props}
-                className="form-input"
-                type={type}
-                key={o.key}
-                name={o.name}
-                checked={checked}
-                value={o.value}
-                onChange={e => {
-                  this.onChange(e, m.key, "multiple");
-                }}
-              />
-              <label key={"ll" + o.key}>{o.label}</label>
-            </React.Fragment>
-          );
-        });
-
-        input = <div className="form-group-checkbox">{input}</div>;
-      }
-
       return (
-        <div key={"g" + key} className="form-group">
-          <label className="form-label" key={"l" + key} htmlFor={key}>
+        <div key={key} className="form-group">
+          <label className="form-label" key={key} htmlFor={key}>
             {m.label}
           </label>
           {input}
@@ -193,7 +112,7 @@ export default class DynamicForm extends React.Component {
   };
 
   render() {
-    let title = this.props.title || "Dynamic Form";
+    let title = this.props.title
 
     return (
       <div className={this.props.className}>

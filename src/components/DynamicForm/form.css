@@ -6,6 +6,7 @@
     margin: 10px 2px;
     max-width: 600px;
 }
+
 .dynamic-form .form-group {
     padding: .5em;
     display: flex;
@@ -18,6 +19,7 @@
     text-align: left;
     color: #2E86C1;
 }
+
 .dynamic-form .form-input{
     margin-top: 5px;
     line-height: 1.5em;
@@ -37,23 +39,9 @@
     flex-direction: row;
 }
 
-.form-group-radio label {
-}
-
-.form-group-radio input {
-
-}
-
 .dynamic-form .form-group-checkbox {
     display: flex;
     flex-direction: row;
-}
-
-.form-group-checkbox label {
-}
-
-.form-group-checkbox input {
-
 }
 
 .form-title {
@@ -63,9 +51,9 @@
 .form-actions {
     display: flex;
 }
+
 .form-actions button {
     width: 80px;
-
     line-height: 1.5em;
     background-color: #3498DB;
     color: white;
